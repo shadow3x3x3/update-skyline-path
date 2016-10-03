@@ -17,8 +17,9 @@ class GrowingGraph
     @outer_nodes.each do |o_n|
       new_partial_outer_nodes = set_outer_nodes(@neighbors_hash[o_n])
       new_outer_nodes << check_partial_outer_nodes(new_partial_outer_nodes, o_n)
+      new_outer_nodes.flatten!
     end
-    @outer_nodes = new_outer_nodes.compact.flatten
+    @outer_nodes = new_outer_nodes.compact
   end
 
   private
@@ -33,9 +34,13 @@ class GrowingGraph
   end
 
   def check_partial_outer_nodes(new_partial_outer_nodes, o_n)
+    result_nodes = []
     unless new_partial_outer_nodes.empty?
       @inner_nodes << o_n unless @inner_nodes.include?(o_n)
-      return new_partial_outer_nodes
+      new_partial_outer_nodes.each do
+         |np_n| result_nodes << np_n unless @outer_nodes.include?(np_n)
+      end
+      return result_nodes
     end
     o_n
   end
