@@ -40,39 +40,3 @@ class GrowingGraph
     o_n
   end
 end
-
-NeighborsHash = {
-  1  => [2, 3, 4, 5, 14],
-  2  => [1, 6, 7, 13],
-  3  => [1, 11, 12, 13],
-  4  => [1, 5, 8],
-  5  => [1, 4, 9, 10],
-  6  => [2],
-  7  => [2],
-  8  => [4],
-  9  => [5],
-  10 => [5],
-  11 => [3],
-  12 => [3],
-  13 => [2, 3],
-  14 => [1]                  
-}
-
-gg = GrowingGraph.new(NeighborsHash, [1, 2])
-puts gg.outer_nodes
-puts "--"
-puts gg.inner_nodes
-puts "--"
-puts '1-G'
-gg.growing
-puts gg.outer_nodes
-puts "--"
-puts gg.inner_nodes
-puts "--"
-puts '2-G'
-gg.growing
-puts gg.outer_nodes
-puts "--"
-puts gg.inner_nodes
-puts "--"
-
