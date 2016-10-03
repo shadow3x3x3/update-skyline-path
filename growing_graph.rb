@@ -37,8 +37,8 @@ class GrowingGraph
     result_nodes = []
     unless new_partial_outer_nodes.empty?
       @inner_nodes << o_n unless @inner_nodes.include?(o_n)
-      new_partial_outer_nodes.each do
-         |np_n| result_nodes << np_n unless @outer_nodes.include?(np_n)
+      new_partial_outer_nodes.each do |np_n| 
+        result_nodes << np_n unless @outer_nodes.include?(np_n)
       end
       return result_nodes
     end
