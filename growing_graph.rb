@@ -27,7 +27,7 @@ class GrowingGraph
   def set_outer_nodes(temp_outer_nodes)
     new_partial_outer_nodes = []
     temp_outer_nodes.each do |temp_o_n|
-      next if @inner_nodes.include?(temp_o_n)      
+      next if duplicate_node?(@inner_nodes, temp_o_n)
       new_partial_outer_nodes << temp_o_n
     end
     new_partial_outer_nodes
@@ -36,12 +36,17 @@ class GrowingGraph
   def check_partial_outer_nodes(new_partial_outer_nodes, o_n)
     result_nodes = []
     unless new_partial_outer_nodes.empty?
-      @inner_nodes << o_n unless @inner_nodes.include?(o_n)
+      @inner_nodes << o_n unless duplicate_node?(@inner_nodes, o_n)
       new_partial_outer_nodes.each do |np_n| 
-        result_nodes << np_n unless @outer_nodes.include?(np_n)
+        result_nodes << np_n unless duplicate_node?(@outer_nodes, np_n)
       end
       return result_nodes
     end
     o_n
+  end
+
+  def duplicate_node?(nodes, node)
+    return true if nodes.include?(node)
+    false
   end
 end
